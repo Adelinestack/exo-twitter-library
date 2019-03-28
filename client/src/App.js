@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { PureComponent } from 'react';
+import { AppContainer, Subject } from './appStyle';
 import { getTweet, searchTweets } from './services/socket';
 
-class App extends Component {
+export default class App extends PureComponent {
   state = {
     tweet: '',
     tweetToSearch: '',
@@ -27,17 +27,20 @@ class App extends Component {
     const { tweet } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <input type="text" onChange={this.onInputChange.bind(this)} />
-          <button onClick={this.onClick.bind(this)}>Go !</button>
-          <h1>Dernier Tweet</h1>
+        <AppContainer>
+          <Subject>
+            <label>Choose a subject</label>
+            <input type="text" onChange={this.onInputChange.bind(this)} />
+            <button onClick={this.onClick.bind(this)}>Go !</button>
+          </Subject>
+          <div>
+            <h1>Tweets parade</h1>
+          </div>
           <div>
             <p>{tweet}</p>
           </div>
-        </header>
+        </AppContainer>
       </div>
     );
   }
 }
-
-export default App;
